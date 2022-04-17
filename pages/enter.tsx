@@ -39,5 +39,7 @@ function SignOutButton() {
 }
 
 function UsernameForm() {
-  return null;
+  return (
+    <SignOutButton />
+  )
 }
