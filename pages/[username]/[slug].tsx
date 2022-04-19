@@ -1,5 +1,7 @@
 import { firestore, getUserWithUsername, postToJSON } from "../../lib/firebase";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 import styles from '../../styles/Post.module.css';
+import PostContent from "../../components/PostContent";
 
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
@@ -43,10 +45,24 @@ export async function getStaticPaths() {
 }
 
 export default function Post(props) {
+  const postRef = firestore.doc(props.path);
+  const [realtimePost] = useDocumentData(postRef);
+
+  const post = realtimePost || props.post;
 
   return (
     <main className={styles.container}>
 
+      <section>
+        <PostContent post={post} />
+      </section>
+
+      <aside className="card">
+        <p>
+          <strong>{post.heartCount || 0} 🤍</strong>
+        </p>
+
+      </aside>
     </main>
   );
 }
