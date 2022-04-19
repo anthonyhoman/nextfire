@@ -4,7 +4,8 @@ import {User} from "../lib/types";
 export default function UserProfile(props: {user: User}) {
     return (
       <div className="box-center">
-        <img src={props.user.photoURL || '/hacker.png'} className="card-img-center" />
+        <img src={props.user.photoURL || '/hacker.png'} className="card-img-center" 
+        referrerPolicy="no-referrer" />
         <p>
           <i>@{props.user.username}</i>
         </p>

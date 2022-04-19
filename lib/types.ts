@@ -10,4 +10,5 @@ export type Post = {
     published?: boolean
     title?: string
     content?: string
+    createdAt?: any
 }
