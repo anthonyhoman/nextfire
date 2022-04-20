@@ -10,11 +10,12 @@ import { useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import ImageUploader from '../../components/ImageUploader';
 
 export default function AdminPostEdit(props) {
   return (
     <AuthCheck>
-        <PostManager />
+      <PostManager />
     </AuthCheck>
   );
 }
@@ -40,7 +41,7 @@ function PostManager() {
           </section>
 
           <aside>
-          <h3>Tools</h3>
+            <h3>Tools</h3>
             <button onClick={() => setPreview(!preview)}>{preview ? 'Edit' : 'Preview'}</button>
             <Link href={`/${post.username}/${post.slug}`}>
               <button className="btn-blue">Live view</button>
@@ -77,13 +78,14 @@ function PostForm({ defaultValues, postRef, preview }) {
       )}
 
       <div className={preview ? styles.hidden : styles.controls}>
-  
-      <textarea name="content" {...register('content', {
-            maxLength: { value: 20000, message: 'content is too long' },
-            minLength: { value: 10, message: 'content is too short' },
-            required: { value: true, message: 'content is required'}
-          })}>
-      </textarea>
+
+        <ImageUploader />
+        <textarea name="content" {...register('content', {
+          maxLength: { value: 20000, message: 'content is too long' },
+          minLength: { value: 10, message: 'content is too short' },
+          required: { value: true, message: 'content is required' }
+        })}>
+        </textarea>
 
         <fieldset>
           <input className={styles.checkbox} name="published" type="checkbox" {...register('published')} />
