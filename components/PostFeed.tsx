@@ -2,7 +2,15 @@ import Link from 'next/link';
 import { Post } from '../lib/types';
 
 export default function PostFeed(props: { posts: Post[], admin: boolean }) {
-  return props.posts ? props.posts.map((post) => <PostItem post={post} key={post.slug} admin={props.admin} />) : null;
+  if(!props.posts) {
+    return <></>
+  } else {
+    return (
+      <>
+        { props.posts.map((post) => <PostItem post={post} key={post.slug} admin={props.admin} />) }
+      </>
+    );
+  }
 }
 
 function PostItem(props: { post: Post, admin: boolean}) {
