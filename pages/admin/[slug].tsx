@@ -25,10 +25,10 @@ function PostManager() {
 
   const router = useRouter();
 
-  const { slugQueryParam } = router.query;
-  const slug: string = Array.isArray(slugQueryParam) ? slugQueryParam[0] : slugQueryParam;
+  const { slug } = router.query;
+  const strSlug: string = Array.isArray(slug) ? slug[0] : slug;
 
-  const postRef = firestore.collection('users').doc(auth.currentUser.uid).collection('posts').doc(slug);
+  const postRef = firestore.collection('users').doc(auth.currentUser.uid).collection('posts').doc(strSlug);
   const [post] = useDocumentData(postRef);
 
   return (
